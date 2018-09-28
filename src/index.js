@@ -6,9 +6,7 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
-import Routes from './routes';
-import { store, history } from './state';
-
+import { AppLayout } from './components/Layout';
 injectGlobal`
   html, body, button, #root {
     height: 100%;
@@ -21,10 +19,7 @@ injectGlobal`
 `;
 
 render(
-  <AppContainer>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>{Routes}</ConnectedRouter>
-    </Provider>
-  </AppContainer>,
+  <AppLayout />
+  ,
   document.getElementById('root'), // eslint-disable-line  no-undef
 );

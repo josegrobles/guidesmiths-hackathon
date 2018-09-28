@@ -7,12 +7,9 @@
     "local": "SERVICE_ENV=local webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
     "dev": "SERVICE_ENV=development webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
     "server": "node index.js",
-    "lint": "node_modules/.bin/eslint .",
     "analyze": "webpack --config webpack.analyze.js --mode production",
     "build-dev": "webpack --config webpack.dev.js --mode development",
-    "build": "webpack --config webpack.prod.js --mode production",
-    "precommit": "npm run lint",
-    "prepush": "npm run test"
+    "build": "webpack --config webpack.prod.js --mode production"
   },
   "dependencies": {
     "bunyan": "^1.8.12",
