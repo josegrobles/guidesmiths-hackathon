@@ -4,11 +4,11 @@ export const SET_IS_AUTH = 'SET_IS_AUTH';
 export const UPDATE_IS_AUTH = 'UPDATE_IS_AUTH';
 export const SET_AUTH_CREDENTIALS = 'SET_AUTH_CREDENTIALS';
 
-export function userLogin(user) {
+export function userLogin(name) {
   return {
     type: USER_LOGIN,
     payload: {
-      user
+      name
     }
   };
 }

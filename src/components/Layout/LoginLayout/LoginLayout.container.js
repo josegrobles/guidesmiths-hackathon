@@ -8,9 +8,4 @@ const mapDispatchToProps = dispatch => ({
   userLogin: (name) => dispatch(userLogin(name))
 });
 
-
-const mapStateToProps = state => ({
-  invoices: state.invoices.data,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogInLayout);
+export default connect(null, mapDispatchToProps)(LogInLayout);

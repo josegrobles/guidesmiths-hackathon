@@ -15,6 +15,7 @@ const enhancer = composeEnhancers(applyMiddleware(routerMiddleware(history), sag
 
 const configureStore = (initialState = {}) => {
   const store = createStore(connectRouter(history)(rootReducer), initialState, enhancer);
+
   sagaMiddleware.run(rootSagas);
   routerMiddleware(history);
 

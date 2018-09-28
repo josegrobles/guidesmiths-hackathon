@@ -16,11 +16,13 @@ import config from '../../config.json'
 
 export function* profileLoginProcess({payload: {name}}) {
   try {
+    debugger;
     yield put(mainLoading(true))
-    const result = yield call(match, {baseUrl: config.baseUrl, name})
+    const result = yield call(match, {baseUrl: config.baseUrl, name: {
+      name
+    }})
     if(result && result.sessionId) {
       yield put(setAuthCredentials({name, sessionId: result.sessionId, isAuth: true}))
-      yield call(Router.push, '/mipepephone-productos', '/mi-pepephone/productos', { shallow: false })
     }
     yield put(mainLoading(false))
   } catch (e) {
