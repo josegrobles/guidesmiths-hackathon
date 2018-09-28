@@ -7,7 +7,7 @@ module.exports = {
   API_URL: process.env.API_URL || 'http://localhost:4000',
   server: {
     host: process.env.TEST_HOST || '0.0.0.0',
-    port: process.env.TEST_PORT || 8080,
+    port: process.env.TEST_PORT || 5000,
   },
   logger: {
     transport: 'console',
