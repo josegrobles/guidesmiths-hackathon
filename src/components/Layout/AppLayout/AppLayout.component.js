@@ -269,20 +269,21 @@ class App extends Component {
                 </div>
               ))}
             </div>
-            <div style={{ position: 'relative' }}>
-              <Board handleClick={this.addBoat} />
-              <Board absolute>
-                {addedBoats.map(obj => <Ship  {...obj} />)}
-              </Board>
-            </div>
             {addedBoats.length === 5 && (
               <button style={{
                 margin: '20px 10px',
                 padding: '10px 10px',
                 background: '#cac8c8',
                 borderRadius: '5px',
+                width: '93%',
               }} onClick={this.createMatch}>Start the fight</button>
             )}
+            <div style={{ position: 'relative' }}>
+              <Board handleClick={this.addBoat} />
+              <Board absolute>
+                {addedBoats.map(obj => <Ship  {...obj} />)}
+              </Board>
+            </div>
           </div>
         )}
         {pages === 'game' && (
