@@ -88,7 +88,7 @@ module.exports = () => {
         if (lastShootType === 'hit') {
           if (lastShoot.destroy) {
             candidates = null;
-            coords = randomShot();
+            coords = randomShoot();
           } else {
             if (candidates === null) {
               candidates = getCandidates({ x: lastShoot.x, y: lastShoot.y });
