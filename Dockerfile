@@ -11,6 +11,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+RUN npm run build
+
 EXPOSE 5000
 
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT ["npm", "run", "server"]

@@ -1,6 +1,6 @@
 export const IS_LOADING = 'IS_LOADING';
 
-export function loading(isLoading) {
+export function mainLoading(isLoading) {
   return {
     type: IS_LOADING,
     payload: {

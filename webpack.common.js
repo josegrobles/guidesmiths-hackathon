@@ -1,9 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const generateConfig = require('./config');
-
-const config = generateConfig(process.env.SERVICE_ENV);
+const config = require('./config.json');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),

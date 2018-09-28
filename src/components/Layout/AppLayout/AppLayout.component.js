@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Ship from '../../Commons/Ship/Ship.Component';
+import Ship from '../../Commons/Ship/Ship.component';
 import { Board } from '../../Commons';
 
 

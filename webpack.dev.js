@@ -1,11 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-
-const generateConfig = require('./config');
-
-const { routes } = generateConfig(process.env.SERVICE_ENV);
-
 module.exports = merge(common, {
   module: {
     rules: [
@@ -37,12 +32,7 @@ module.exports = merge(common, {
   devServer: {
     hot: true,
     contentBase: './',
-    historyApiFallback: true,
-    setup: (app) => {
-      app.get('/config', (req, res) => {
-        res.json(routes.api);
-      });
-    },
+    historyApiFallback: true
   },
   devtool: 'cheap-module-source-map',
 });
