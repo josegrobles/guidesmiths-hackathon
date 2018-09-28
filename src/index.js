@@ -23,7 +23,7 @@ injectGlobal`
 render(
   <AppContainer>
     <Provider store={store}>
-        <ConnectedRouter history={history}>{Routes}</ConnectedRouter>
+      <ConnectedRouter history={history}>{Routes}</ConnectedRouter>
     </Provider>
   </AppContainer>,
   document.getElementById('root'), // eslint-disable-line  no-undef
