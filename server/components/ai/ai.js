@@ -45,7 +45,7 @@ module.exports = () => {
       return shoot;
     }
 
-    const getHits = (shoot) => R.filter(x => x.type === 'hit', shoot).length
+    const getHits = () => R.filter(x => x.type === 'hit', shoots)
 
     let candidates = null;
 
@@ -79,7 +79,7 @@ module.exports = () => {
 
       let coords;
       const lastShoot = shoots.slice(-1)[0];
-      const lastHit = getHits.slice(-1)[0];
+      const lastHit = getHits().slice(-1)[0];
       console.log(!lastShoot)
       if (!lastShoot) {
         coords = randomShoot();

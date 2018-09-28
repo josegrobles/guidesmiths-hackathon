@@ -81,7 +81,19 @@ module.exports = () => {
       const auto = req.body.auto ? req.body.auto : false
 
       if(auto) {
-         return controller.ai(sessionId, name, password)
+         return controller.bot(sessionId, name, password).then(({x,y}) => {
+           console.log(x,y)
+            const shoot = {
+              sessionId,
+              name,
+              password,
+              x,
+              y
+            }
+            return controller.shoot(shoot).then(shoot => res.json(shoot)).catch(err => {
+              return res.json({error: err.error})
+            })
+        })
       }
 
       const shoot = {

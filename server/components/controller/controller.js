@@ -58,14 +58,17 @@ module.exports = () => {
 
     const shoot = shoot => request(options.shoot(shoot))
 
-    const ai = (sessionId, name, password) => {
+    const bot = (sessionId, name, password) => {
         const match = {
             sessionId,
             name,
             password
           }
 
-          return getMatch(match).then(match => ai.calculateShoot(match.shoots))
+          return getMatch(match).then(match => {
+              console.log(JSON.stringify(match))
+              return ai.calculateShoot(match.shoots, name)
+          })
     }
 
     const api = {
@@ -73,7 +76,8 @@ module.exports = () => {
         registerMatch,
         getMatchList,
         getMatch,
-        shoot
+        shoot,
+        bot
     }
 
     cb(null, api);
