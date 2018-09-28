@@ -14,7 +14,7 @@ const Ship = ({ x, y, direction, size, noGrid }) => {
   }
   if (noGrid) {
     return (
-      <div style={{ width: `${size}0%` }}>
+      <div style={{ width: `100%` }}>
         <img style={{ width: '100%', ...rotate }} src={require(`../../../static/ship_${size}.png`)} />
       </div>
     );

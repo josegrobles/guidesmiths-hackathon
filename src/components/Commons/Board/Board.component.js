@@ -22,7 +22,7 @@ const defaultStyle = {
   width: '100vw',
   gridGap: '2px',
   height: '375px',
-  backgroundColor: 'white',
+  backgroundColor: '#6cc1ea',
 };
 
 const Board = ({ absolute, children, handleClick }) => (

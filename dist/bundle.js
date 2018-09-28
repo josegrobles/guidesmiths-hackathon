@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "4fa63e845ea8e317802a";
+/******/ 	var hotCurrentHash = "2e218168e6c6b29b077a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -51869,7 +51869,7 @@ var defaultStyle = {
   width: '100vw',
   gridGap: '2px',
   height: '375px',
-  backgroundColor: 'white'
+  backgroundColor: '#6cc1ea'
 };
 
 var Board = function Board(_ref) {
@@ -51958,7 +51958,7 @@ var Ship = function Ship(_ref) {
   if (noGrid) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
       'div',
-      { style: { width: size + '0%' } },
+      { style: { width: '100%' } },
       react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('img', { style: _extends({ width: '100%' }, rotate), src: __webpack_require__("./static sync recursive ^\\.\\/ship_.*\\.png$")("./ship_" + size + '.png') })
     );
   }
@@ -52464,49 +52464,45 @@ var App = function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
         'div',
         null,
-        pages === 'init' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-          'h1',
-          null,
-          'Battle ship game'
-        ),
         pages === 'create' && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
           'div',
           null,
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             'h3',
-            null,
-            'Create your borad'
+            { style: { textAlign: 'center', margin: 0, padding: '10px 0', backgroundColor: '#FFF' } },
+            'Bay of pigs'
           ),
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             'div',
-            null,
+            { style: { display: 'flex', flexDirection: 'column', padding: '0 20px', backgroundColor: '#FFF' } },
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
               'label',
               null,
-              'Add your user'
+              'Tell us your name'
             ),
             react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement('input', { style: {
                 margin: '20px 10px',
                 padding: '10px 10px',
                 background: '#cac8c8',
                 borderRadius: '5px'
-              }, onChange: this.handleUser })
-          ),
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-            'button',
-            { style: {
-                margin: '20px 10px',
-                padding: '10px 10px',
-                background: '#cac8c8',
-                borderRadius: '5px'
-              }, onClick: function onClick() {
-                return _this3.rotate(direction);
-              } },
-            'Rotate'
+              }, onChange: this.handleUser }),
+            react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+              'button',
+              { style: {
+                  margin: '20px 10px',
+                  padding: '10px 10px',
+                  background: 'rgb(255, 255, 255)',
+                  borderRadius: '5px',
+                  border: '1px solid rgb(202, 200, 200)'
+                }, onClick: function onClick() {
+                  return _this3.rotate(direction);
+                } },
+              'Rotate'
+            )
           ),
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
             'div',
-            { style: { display: 'flex', height: '8vh' } },
+            { style: { display: 'flex', height: '8vh', padding: '0 20px', backgroundColor: '#FFF' } },
             defaultShips.filter(function (obj) {
               return obj.direction === direction;
             }).map(function (obj) {

@@ -205,28 +205,26 @@ class App extends Component {
     const { pages, addedBoats, direction, modal, shoots, tables, turn, sessionId, password } = this.state;
     return (
       <div>
-        {pages === 'init' && (
-          <h1>Battle ship game</h1>
-        )}
         {pages === 'create' && (
           <div>
-            <h3>Create your borad</h3>
-            <div>
-              <label>Add your user</label>
+            <h3 style={{ textAlign: 'center', margin: 0, padding: '10px 0', backgroundColor: '#FFF' }}>Bay of pigs</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', padding: '0 20px', backgroundColor: '#FFF' }}>
+              <label>Tell us your name</label>
               <input style={{
                 margin: '20px 10px',
                 padding: '10px 10px',
                 background: '#cac8c8',
                 borderRadius: '5px',
               }} onChange={this.handleUser} />
+              <button style={{
+                  margin: '20px 10px',
+                  padding: '10px 10px',
+                  background: 'rgb(255, 255, 255)',
+                  borderRadius: '5px',
+                  border: '1px solid rgb(202, 200, 200)',
+                }} onClick={() => this.rotate(direction)}>Rotate</button>
             </div>
-            <button style={{
-                margin: '20px 10px',
-                padding: '10px 10px',
-                background: '#cac8c8',
-                borderRadius: '5px',
-              }} onClick={() => this.rotate(direction)}>Rotate</button>
-            <div style={{ display: 'flex', height: '8vh' }}>
+            <div style={{ display: 'flex', height: '8vh', padding: '0 20px', backgroundColor: '#FFF' }}>
               {defaultShips.filter(obj => obj.direction === direction).map((obj) => (
                 <div onClick={() => this.choseBoat(obj.size, obj.direction)}>
                   <Ship {...obj} />
