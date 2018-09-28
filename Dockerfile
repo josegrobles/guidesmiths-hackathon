@@ -13,6 +13,4 @@ COPY . .
 
 EXPOSE 5000
 
-RUN npm run manifest
-
 ENTRYPOINT [ "npm", "start" ]
