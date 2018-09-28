@@ -11,7 +11,8 @@ export function user(state = initialUser, { type, payload }) {
         ...state,
         name: payload.name,
         sessionId: payload.sessionId,
-        isAuth: payload.isAuth
+        isAuth: payload.isAuth,
+        password: payload.password,
       };
     default:
       return state;

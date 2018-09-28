@@ -4,5 +4,5 @@ export const match = (data) =>
     baseUrl: data.baseUrl,
     endPoint: encodeURI('/match'),
     method: 'POST',
-    body: data.name,
+    body: {...data.name},
   });

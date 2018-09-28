@@ -1,3 +1,11 @@
+import { connect } from 'react-redux'
+
+import { userLogin } from '../../../actions/user';
+
 import AppLayout from './AppLayout.styled';
 
-export default AppLayout;
+const mapDispatchToProps = dispatch => ({
+  userLogin: (name) => dispatch(userLogin(name))
+});
+
+export default connect(null, mapDispatchToProps)(AppLayout);

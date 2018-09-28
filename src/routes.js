@@ -1,9 +1,7 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
-import { LogInLayout } from './components/Layout';
-import { AppLayout } from './components/Layout';
+import { AppLayout, GameLayout } from './components/Layout';
 
 const Routes = (
   <div>
@@ -11,12 +9,12 @@ const Routes = (
       <Route
         exact
         path="/"
-        component={LogInLayout}
+        component={AppLayout}
       />
       <Route
         exact
-        path="/player-builder"
-        component={AppLayout}
+        path="/game"
+        component={GameLayout}
       />
     </Switch>
   </div>

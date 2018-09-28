@@ -16,13 +16,12 @@ import config from '../../config.json'
 
 export function* profileLoginProcess({payload: {name}}) {
   try {
-    debugger;
     yield put(mainLoading(true))
     const result = yield call(match, {baseUrl: config.baseUrl, name: {
       name
     }})
     if(result && result.sessionId) {
-      yield put(setAuthCredentials({name, sessionId: result.sessionId, isAuth: true}))
+      yield put(setAuthCredentials({name, sessionId: result.sessionId, isAuth: true, password: result.password}))
     }
     yield put(mainLoading(false))
   } catch (e) {
