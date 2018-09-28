@@ -3,15 +3,24 @@ const R = require('ramda');
 module.exports = () => {
   const start = ({ config, logger }, cb) => {
 
-    // const grid = [
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    //   [null, null, null, null, null, null, null],
-    // ];
+    const getGrid = (shoots, user) => {
+      const emptyGrid = [
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+      ];
+      for (let i = 0; i < shoots.length; i++) {
+        let shoot = shoots[i];
+        if (shoot.user === user) {
+          emptyGrid[shoot.x][shoot.y] = shoot.type;
+        }
+      }
+      return emptyGrid;
+    };
 
     const SIZE = 7;
     const INDEX_SIZE = SIZE - 1;
@@ -64,8 +73,8 @@ module.exports = () => {
       return res;
     };
 
-    const calculateShoot = (_grid, _shoots) => {
-      grid = _grid;
+    const calculateShoot = (_shoots, user) => {
+      grid = getGrid(_shoots, user);
       shoots = _shoots;
 
       let coords;
