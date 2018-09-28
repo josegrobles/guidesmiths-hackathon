@@ -79,6 +79,7 @@ module.exports = () => {
 
       let coords;
       const lastShoot = shoots.slice(-1)[0];
+      const lastHit = getHits.slice(-1)[0];
       console.log(!lastShoot)
       if (!lastShoot) {
         coords = randomShoot();
