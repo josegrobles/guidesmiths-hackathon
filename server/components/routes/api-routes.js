@@ -75,8 +75,8 @@ module.exports = () => {
       const sessionId = req.body.sessionId;
       const name = req.body.name;
       const password = req.body.password;
-      const x = req.body.x || parseInt(req.body.x);
-      const y = req.body.y || parseInt(req.body.y);
+      const x = req.body.x ? parseInt(req.body.x) : 1;
+      const y = req.body.y ? parseInt(req.body.y) : 1;
 
       const auto = req.body.auto ? req.body.auto : false
 
