@@ -3,6 +3,52 @@ const R = require('ramda');
 module.exports = () => {
   const start = ({ config, logger }, cb) => {
 
+    const shoots = [{ "x": 2, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 3, "y": 3, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 3, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 1, "y": 1, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 1, "y": 1, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 5, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 4, "y": 4, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 4, "y": 4, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 3, "y": 3, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 3, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 3, "y": 1, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 1, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 1, "y": 2, "type": "miss", "name": "pe1ww3", "destroy": null },
+    { "x": 1, "y": 2, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 3, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 1, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 5, "y": 5, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 1, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 3, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 1, "y": 1, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 3, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 5, "y": 5, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 5, "y": 3, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 5, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 1, "y": 4, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 2, "y": 4, "type": "miss", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 4, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 4, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 4, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 5, "y": 3, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 3, "y": 4, "type": "miss", "name": "pe1ww2", "destroy": null },
+    { "x": 0, "y": 1, "type": "miss", "name": "pe1ww3", "destroy": null },
+    { "x": 6, "y": 4, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 0, "y": 2, "type": "miss", "name": "pe1ww3", "destroy": null },
+    { "x": 4, "y": 4, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 5, "y": 4, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 1, "y": 1, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 2, "y": 1, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 2, "y": 1, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww2", "destroy": null },
+    { "x": 2, "y": 2, "type": "hit", "name": "pe1ww3", "destroy": null }]
+
     const getGrid = (shoots, user) => {
       const emptyGrid = [
         [null, null, null, null, null, null, null],
@@ -45,7 +91,7 @@ module.exports = () => {
       return shoot;
     }
 
-    const getHits = () => R.filter(x => x.type === 'hit', shoots)
+    const getHits = (shoots) => R.filter(x => x.type === 'hit', shoots)
 
     let candidates = null;
 
@@ -73,9 +119,8 @@ module.exports = () => {
       return res;
     };
 
-    const calculateShoot = (_shoots, user) => {
-      grid = getGrid(_shoots, user);
-      shoots = _shoots;
+    const calculateShoot = (shoots, user) => {
+      grid = getGrid(shoots, user);
 
       let coords;
       const lastShoot = shoots.slice(-1)[0];
