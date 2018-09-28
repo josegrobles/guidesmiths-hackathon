@@ -78,6 +78,12 @@ module.exports = () => {
       const x = parseInt(req.body.x);
       const y = parseInt(req.body.y);
 
+      const auto = req.body.auto ? req.body.auto : false
+
+      if(auto) {
+         return controller.ai(sessionId, name, password)
+      }
+
       const shoot = {
         sessionId,
         name,
