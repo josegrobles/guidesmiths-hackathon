@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "React application for the 2018 GuideSmiths Hackathon",
   "scripts": {
+    "start": "SERVICE_ENV=production node index.js",
     "wait-on": "./node_modules/.bin/wait-on",
     "local": "SERVICE_ENV=local webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
     "dev": "SERVICE_ENV=development webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
@@ -12,6 +13,7 @@
     "build": "webpack --config webpack.prod.js --mode production"
   },
   "dependencies": {
+    "optional": "^0.1.4",
     "bunyan": "^1.8.12",
     "chalk": "^2.4.1",
     "concurrently": "^4.0.1",

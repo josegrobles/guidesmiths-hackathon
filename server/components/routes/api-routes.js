@@ -10,7 +10,8 @@ module.exports = () => {
   const start = ({ app, config, controller }, cb) => {
     app.use(helmet());
     app.use(bodyParser.urlencoded({ extended: true }));
-		app.use(bodyParser.json());
+    app.use(bodyParser.json());
+    
     app.use((req, res, next) => {
       res.header('Accept-Encoding', 'gzip,x-gzip');
       res.header('X-Content-Type-Options', 'text/javascript');
@@ -19,11 +20,7 @@ module.exports = () => {
       next();
     });
     app.use(express.static(join(root, 'static')));
-    app.get('*.js', (req, res, next) => {
-      req.url = `${req.url}.gz`;
-      res.set('Content-Encoding', 'x-gzip');
-      next();
-    });
+ 
 
     app.use('/dist', express.static(join(root, 'dist')));
     app.get('/config', (req, res) => {
