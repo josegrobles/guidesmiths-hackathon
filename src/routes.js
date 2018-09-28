@@ -2,6 +2,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { LogInLayout } from './components/Layout';
 import { AppLayout } from './components/Layout';
 
 const Routes = (
@@ -10,6 +11,11 @@ const Routes = (
       <Route
         exact
         path="/"
+        component={LogInLayout}
+      />
+      <Route
+        exact
+        path="/player-builder"
         component={AppLayout}
       />
     </Switch>

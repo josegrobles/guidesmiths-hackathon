@@ -8,6 +8,9 @@ import {
 import { mainLoading } from '../actions/common'
 import { USER_LOGIN, setAuthCredentials } from '../actions/user'
 
+//services
+import { match } from '../services/match'
+
 // config
 import config from '../../config.json'
 
