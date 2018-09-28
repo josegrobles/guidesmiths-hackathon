@@ -1,10 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
 import {
-  watchInit,
+  watchInitGame,
 } from '.';
 
 export default function* root() {
   yield all([
-    fork(watchInit),
+    fork(watchInitGame),
   ]);
 }
