@@ -1,10 +1,20 @@
-import { combineReducers } from 'redux';
+import { SET_AUTH_CREDENTIALS } from '../actions/user'
 
-// reducers
-import { init } from './init';
+const initialUser = {
+  isAuth: false
+};
 
-const rootReducer = combineReducers({
-  init
-});
+export function user(state = initialUser, { type, payload }) {
+  switch (type) {
+    case SET_AUTH_CREDENTIALS:
+      return {
+        ...state,
+        name: payload.name,
+        sessionId: payload.sessionId,
+        isAuth: payload.isAuth
+      };
+    default:
+      return state;
+  }
+}
 
-export default rootReducer;

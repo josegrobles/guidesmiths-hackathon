@@ -1,10 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
 import {
-  watchInitGame,
-} from '.';
+  watchProfileLoginProcess,
+} from './auth';
 
-export default function* root() {
+export default function* rootSagas() {
   yield all([
-    fork(watchInitGame),
+    fork(watchProfileLoginProcess),
   ]);
 }

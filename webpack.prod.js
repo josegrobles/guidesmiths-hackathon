@@ -41,15 +41,6 @@ module.exports = merge(common, {
     ],
     splitChunks: { chunks: 'all' },
   },
-  /*
-  // BUG with select component - Interesting to add, Preact’s 3kb against React’s 45kb
-  resolve: {
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat',
-    },
-  },
-  */
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|es/),

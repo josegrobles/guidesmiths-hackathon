@@ -1,51 +1,52 @@
-export const VALIDATE_JSON = 'VALIDATE_JSON';
-export const VALIDATE_JSON_STATUS = 'VALIDATE_JSON_STATUS';
-export const VALIDATE_JSON_SET = 'VALIDATE_JSON_SET';
-export const VALIDATE_JSON_PUSH = 'VALIDATE_JSON_PUSH';
+export const USER_LOGIN = 'USER_LOGIN';
+export const IS_AUTH = 'IS_AUTH';
+export const SET_IS_AUTH = 'SET_IS_AUTH';
+export const UPDATE_IS_AUTH = 'UPDATE_IS_AUTH';
+export const SET_AUTH_CREDENTIALS = 'SET_AUTH_CREDENTIALS';
 
-export function validationJson(json) {
+export function userLogin({user}) {
   return {
-    type: VALIDATE_JSON,
+    type: USER_LOGIN,
     payload: {
-      json
+      user
     }
   };
 }
 
-export function validationJsonStatus(success, textSuccess) {
-  return {
-    type: VALIDATE_JSON_STATUS,
-    payload: {
-      success,
-      textSuccess
-    }
-  };
+export function isAuth({path = null, asPath = null} = {}) {
+  if(path || asPath) {
+    return {
+      type: IS_AUTH,
+      payload: {
+        path: path,
+        asPath: asPath
+      }
+    };
+  } else {
+    return {
+      type: IS_AUTH
+    };
+  }
 }
 
-export function validationJsonSet(json) {
+export function updateIsAuth() {
   return {
-    type: VALIDATE_JSON_SET,
-    payload: {
-      json
-    }
-  };
+    type: UPDATE_IS_AUTH
+  }
 }
 
-export function validationJsonPush(
-  json,
-  prevJson,
-  environment,
-  userName,
-  partnerId
-) {
+export function setIsAuth() {
   return {
-    type: VALIDATE_JSON_PUSH,
+    type: SET_IS_AUTH
+  }
+}
+
+export function setAuthCredentials({user, sessionId}) {
+  return {
+    type: SET_AUTH_CREDENTIALS,
     payload: {
-      json,
-      prevJson,
-      environment,
-      userName,
-      partnerId
+      name: name,
+      sessionId: sessionId
     }
   };
 }
