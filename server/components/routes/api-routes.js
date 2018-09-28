@@ -76,7 +76,7 @@ module.exports = () => {
       const name = req.body.name;
       const password = req.body.password;
       const x = parseInt(req.body.x);
-      const y = parseInt(req.body.x);
+      const y = parseInt(req.body.y);
 
       const shoot = {
         sessionId,
