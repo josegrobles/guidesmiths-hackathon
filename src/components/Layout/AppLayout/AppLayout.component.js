@@ -100,6 +100,7 @@ class App extends Component {
       modal: true,
     };
     this.addBoat = this.addBoat.bind(this);
+    this.createMatch = this.createMatch.bind(this);
   }
 
   choseBoat(size, direction) {
@@ -137,6 +138,40 @@ class App extends Component {
     this.setState({ direction: newLetter });
   }
 
+  async createMatch() {
+    const { addedBoats } = this.state;
+    const payload = {
+      positions: addedBoats,
+    };
+    try {
+      const req = await fetch('/match', {
+        method: 'post',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const {
+        name,
+        gameId,
+        sessionId,
+        shipPosition,
+      } = await req.json();
+      this.setState({
+        pages: 'game',
+        name,
+        gameId,
+        sessionId,
+        shipPosition,
+      });
+      const reqGetMAtch = await fetch('/match');
+      const mathcStatus = await reqGetMAtch.json();
+      console.log(mathcStatus);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render() {
     const { pages, addedBoats, direction, modal } = this.state;
     return (
@@ -162,7 +197,7 @@ class App extends Component {
               </Board>
             </div>
             {addedBoats.length === 5 && (
-              <button>Start the fight</button>
+              <button onClick={this.createMatch}>Start the fight</button>
             )}
           </div>
         )}
