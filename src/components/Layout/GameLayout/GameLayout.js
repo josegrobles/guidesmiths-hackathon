@@ -101,6 +101,32 @@ class App extends Component {
       modal: true,
     };
     this.interval = this.interval.bind(this);
+    this.addBoat = this.addBoat.bind(this);
+  }
+
+  async addBoat(index) {
+    const divider = index / 5;
+    const dividerString = divider.toString();
+    let x = index % 7;
+    let y = index % 7 === 0 ? Math.trunc(index / 7) : Math.trunc(index / 7) + 1;
+    console.log(index, x,y)
+    try {
+      const reqShoot = await fetch('http://localhost:5000/match/shoot', {
+        method: 'post',
+        body: JSON.stringify({
+          sessionId: '510598',
+          name: 'pe1ww3',
+          password: 'bCmgQ_Vzz',
+          x: x,
+          y: y,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   async interval() {
@@ -118,10 +144,10 @@ class App extends Component {
   async componentDidMount() {
     try {
       const reqMatchStatus = await fetch(`http://localhost:5000/match?sessionId=510598&name=pe1ww3&password=bCmgQ_Vzz`);
-      const { tables, shoots } = await reqMatchStatus.json();
+      const { tables, shoots, turn } = await reqMatchStatus.json();
       console.log(tables);
       console.log(shoots);
-      this.setState({ tables: tables.pe1ww3, shoots });
+      this.setState({ tables: tables.pe1ww3, shoots, turn });
     } catch (e) {
       console.log(e);
     }
@@ -129,11 +155,12 @@ class App extends Component {
   }
 
   render() {
-    const { pages, tables, direction, modal, shoots } = this.state;
+    const { pages, tables, direction, modal, shoots, turn } = this.state;
     return (
       <div>
+        <h2>Turn: {turn}</h2>
         <div style={{ position: 'relative' }}>
-          <Board />
+          <Board handleClick={this.addBoat} />
           <Board absolute>
             {shoots.filter(obj => obj.name === 'pe1ww3').map(obj => <Shoot  {...obj} />)}
           </Board>

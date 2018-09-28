@@ -114,17 +114,9 @@ class App extends Component {
     if (addedBoats.length === 5) {
       return true;
     }
-    const divider = index / 10;
-    const dividerString = divider.toString();
-    let x = 0;
-    let y = 0;
-    if (!dividerString.split('.')[1]) {
-      x = divider;
-      y = divider;
-    } else {
-      y = Number(dividerString.split('.')[0]) + 1;
-      x = Number(dividerString.split('.')[1]) + 1;
-    }
+    let x = index % 7;
+    let y = index % 7 === 0 ? Math.trunc(index / 7) : Math.trunc(index / 7) + 1;
+    console.log(index, x,y)
     this.setState({
       addedBoats: [...addedBoats, { ...chooseBoat, x, y }],
     });
@@ -143,6 +135,7 @@ class App extends Component {
     const payload = {
       positions: addedBoats,
     };
+    /*
     try {
       const req = await fetch('http://localhost:5000/match', {
         method: 'post',
@@ -169,7 +162,8 @@ class App extends Component {
       console.log(mathcStatus);
     } catch (err) {
       console.log(err);
-    }
+    }*/
+    window.location.href = '/game';
   }
 
   render() {
