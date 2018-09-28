@@ -40,7 +40,7 @@ const options = {
 }
 
 module.exports = () => {
-  const start = ({ config, logger }, cb) => {
+  const start = ({ config, logger, ai }, cb) => {
 
     const registerUser = (name) => {
         debug(`Creating user ${name}`);
@@ -58,12 +58,27 @@ module.exports = () => {
 
     const shoot = shoot => request(options.shoot(shoot))
 
+    const bot = (sessionId, name, password) => {
+        const match = {
+            sessionId,
+            name,
+            password
+          }
+          console.log(match)
+
+          return getMatch(match).then(match => {
+              console.log(JSON.stringify(match))
+              return ai.calculateShoot(match.shoots, name)
+          })
+    }
+
     const api = {
         registerUser,
         registerMatch,
         getMatchList,
         getMatch,
-        shoot
+        shoot,
+        bot
     }
 
     cb(null, api);

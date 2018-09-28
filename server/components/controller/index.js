@@ -3,4 +3,4 @@ const controller = require('./controller');
 
 module.exports = new System({ name: 'controller' })
   .add('controller', controller())
-  .dependsOn('config', 'logger')
+  .dependsOn('config', 'logger', 'ai')
