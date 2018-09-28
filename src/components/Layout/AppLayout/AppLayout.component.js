@@ -112,6 +112,7 @@ class App extends Component {
     this.createMatch = this.createMatch.bind(this);
     this.shootBoat = this.shootBoat.bind(this);
     this.autoSet = this.autoSet.bind(this);
+    this.handleSessionId = this.handleSessionId.bind(this);
   }
 
   autoSet() {
@@ -156,6 +157,10 @@ class App extends Component {
 
   handleUser({ target }) {
     this.setState({ user: target.value });
+  }
+
+  handleSessionId({ target }) {
+    this.setState({ sessionId: target.value });
   }
 
   addBoat(index) {
@@ -209,10 +214,11 @@ class App extends Component {
   }
 
   async createMatch() {
-    const { addedBoats, user } = this.state;
+    const { addedBoats, user, sessionId } = this.state;
     const payload = {
       positions: addedBoats,
       name: user,
+      sessionId: (sessionId) ? sessionId : undefined,
     };
     //this.props.userLogin(payload);
     const reqShoot = await fetch('/match', {
@@ -241,7 +247,13 @@ class App extends Component {
                 padding: '10px 10px',
                 background: '#cac8c8',
                 borderRadius: '5px',
-              }} onChange={this.handleUser} />
+              }} placeholder="name" onChange={this.handleUser} />
+              <input style={{
+                margin: '20px 10px',
+                padding: '10px 10px',
+                background: '#cac8c8',
+                borderRadius: '5px',
+              }} placeholder="game room" onChange={this.handleSessionId} />
               <button style={{
                   margin: '20px 10px',
                   padding: '10px 10px',
