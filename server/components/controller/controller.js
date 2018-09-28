@@ -12,6 +12,18 @@ const options = {
         json: true,
             method: 'POST',
     }),
+    match: body => ({
+        baseUrl: API_URI,
+        uri: '/battleship/createOrJoin',
+        body,
+        json: true,
+        method: 'POST',
+    }),
+    matchList: () => ({
+        baseUrl: API_URI,
+        uri: '/battleship/list',
+        json: true,
+    }),
 }
 
 module.exports = () => {
@@ -22,8 +34,17 @@ module.exports = () => {
         return request(options.user(name));
     }
 
+    const registerMatch = match => {
+        debug(`Creating match ${match.sessionId}`);
+        return request(options.match(match));
+    }
+
+    const getMatchList = () => request(options.matchList())
+
     const api = {
         registerUser,
+        registerMatch,
+        getMatchList
     }
 
     cb(null, api);

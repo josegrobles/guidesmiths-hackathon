@@ -36,6 +36,28 @@ module.exports = () => {
       return controller.registerUser(name).then(user => res.json(user)).catch(console.log);
     })
 
+    app.post('/match', (req, res, next) => {
+      const name = req.body.name || ''; 
+      const shipPosition = req.body.positions || [];
+      const gameId = "777777";
+      const sessionId = req.body.sessionId || String(Math.floor(Math.random() * 1000000));
+
+      const match = {
+        name,
+        gameId,
+        sessionId,
+        shipPosition
+      }
+
+      return controller.registerMatch(match).then(match => res.json(match)).catch(err => {
+        return res.json({error: err.error})
+      });
+    })
+
+    app.get('/match/list', (req, res, next) => controller.getMatchList().then(matchList => res.json(matchList)).catch(err => {
+      return res.json({error: err.error})
+    }))
+
     app.get('*', (req, res) => {
       res.sendFile(join(root, 'index.html'));
     });
