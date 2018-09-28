@@ -64,6 +64,7 @@ module.exports = () => {
             name,
             password
           }
+          console.log(match)
 
           return getMatch(match).then(match => {
               console.log(JSON.stringify(match))
