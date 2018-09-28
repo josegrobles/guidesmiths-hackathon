@@ -17,9 +17,8 @@ const Shoot = ({ x, y, direction, type, size, noGrid }) => {
     return (
       <div style={{...style, display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'}}>
-          <img style={{ width: '100%', ...rotate }} src={require(`../../../static/chill.gif`)} />
-        </div>
+      alignItems: 'center',
+      backgroundColor: 'rgb(115, 144, 156)'}} />
       );
   }
   if (noGrid) {
