@@ -58,6 +58,44 @@ module.exports = () => {
       return res.json({error: err.error})
     }))
 
+    app.get('/match', (req, res, next) => {
+      const sessionId = req.query.sessionId;
+      const name = req.query.name;
+      const password = req.query.password;
+
+      const match = {
+        sessionId,
+        name,
+        password
+      }
+
+      return controller.getMatch(match).then(match => res.json(match)).catch(err => {
+        return res.json({error: err.error})
+      })
+    })
+
+    app.post('/match/shoot', (req, res, next) => {
+      const sessionId = req.body.sessionId;
+      const name = req.body.name;
+      const password = req.body.password;
+      const x = parseInt(req.body.x);
+      const y = parseInt(req.body.x);
+
+      const shoot = {
+        sessionId,
+        name,
+        password,
+        x,
+        y
+      }
+
+      console.log(shoot)
+
+      return controller.shoot(shoot).then(shoot => res.json(shoot)).catch(err => {
+        return res.json({error: err.error})
+      })
+    })
+
     app.get('*', (req, res) => {
       res.sendFile(join(root, 'index.html'));
     });
