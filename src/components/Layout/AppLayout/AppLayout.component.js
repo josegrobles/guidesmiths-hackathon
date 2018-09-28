@@ -144,7 +144,7 @@ class App extends Component {
       positions: addedBoats,
     };
     try {
-      const req = await fetch('/match', {
+      const req = await fetch('http://localhost:5000/match', {
         method: 'post',
         body: JSON.stringify(payload),
         headers: {
@@ -164,7 +164,7 @@ class App extends Component {
         sessionId,
         shipPosition,
       });
-      const reqGetMAtch = await fetch('/match');
+      const reqGetMAtch = await fetch('http://localhost:5000/match');
       const mathcStatus = await reqGetMAtch.json();
       console.log(mathcStatus);
     } catch (err) {

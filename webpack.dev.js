@@ -29,10 +29,5 @@ module.exports = merge(common, {
       },
     ],
   },
-  devServer: {
-    hot: true,
-    contentBase: './',
-    historyApiFallback: true
-  },
   devtool: 'cheap-module-source-map',
 });

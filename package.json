@@ -5,7 +5,7 @@
   "scripts": {
     "start": "SERVICE_ENV=production node index.js",
     "wait-on": "./node_modules/.bin/wait-on",
-    "local": "SERVICE_ENV=local webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
+    "local": "SERVICE_ENV=local webpack --open --mode development --inline --hot --config webpack.dev.js",
     "dev": "SERVICE_ENV=development webpack-dev-server --open --mode development --inline --hot --config webpack.dev.js",
     "server": "node index.js",
     "analyze": "webpack --config webpack.analyze.js --mode production",

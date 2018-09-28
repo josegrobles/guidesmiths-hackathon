@@ -4,8 +4,8 @@ const array = new Array(100).fill('');
 
 const absoluteStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(10, 1fr)',
-  gridTemplateRows: 'repeat(10, 1fr)',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  gridTemplateRows: 'repeat(5, 1fr)',
   width: '100vw',
   gridGap: '2px',
   height: '375px',
@@ -17,8 +17,8 @@ const absoluteStyle = {
 
 const defaultStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(10, 1fr)',
-  gridTemplateRows: 'repeat(10, 1fr)',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  gridTemplateRows: 'repeat(5, 1fr)',
   width: '100vw',
   gridGap: '2px',
   height: '375px',

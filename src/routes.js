@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { AppLayout } from './components/Layout';
+import { AppLayout, GameLayout } from './components/Layout';
 
 const Routes = (
   <div>
@@ -11,6 +11,16 @@ const Routes = (
         exact
         path="/"
         component={AppLayout}
+      />
+      <Route
+        exact
+        path="/build"
+        component={AppLayout}
+      />
+      <Route
+        exact
+        path="/game"
+        component={GameLayout}
       />
     </Switch>
   </div>

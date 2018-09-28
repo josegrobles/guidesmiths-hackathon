@@ -22,7 +22,7 @@ const Ship = ({ x, y, direction, size, noGrid }) => {
   return (
     <div style={{...style, display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'}}>
+      alignItems: 'flex-start'}}>
       <img style={{ width: '100%', ...rotate }} src={require(`../../../static/ship_${size}.png`)} />
     </div>
   );
