@@ -120,7 +120,7 @@ class App extends Component {
 
   async interval({ password, sessionId }) {
     try {
-      const reqMatchStatus = await fetch(`http://localhost:5000/match?sessionId=${sessionId}&name=${this.state.user}&password=${password}`);
+      const reqMatchStatus = await fetch(`/match?sessionId=${sessionId}&name=${this.state.user}&password=${password}`);
       const { tables, shoots, turn } = await reqMatchStatus.json();
       console.log(tables);
       console.log(shoots);
@@ -155,7 +155,7 @@ class App extends Component {
     let y = index % 7 === 0 ? Math.trunc(index / 7) : Math.trunc(index / 7) + 1;
     console.log(index, x,y)
     try {
-      const reqShoot = await fetch('http://localhost:5000/match/shoot', {
+      const reqShoot = await fetch('/match/shoot', {
         method: 'post',
         body: JSON.stringify({
           sessionId: this.state.sessionId,
@@ -189,7 +189,7 @@ class App extends Component {
       name: user,
     };
     //this.props.userLogin(payload);
-    const reqShoot = await fetch('http://localhost:5000/match', {
+    const reqShoot = await fetch('/match', {
       method: 'post',
       body: JSON.stringify(payload),
       headers: {
