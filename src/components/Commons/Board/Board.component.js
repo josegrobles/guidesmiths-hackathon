@@ -8,7 +8,7 @@ const absoluteStyle = {
   gridTemplateRows: 'repeat(10, 1fr)',
   width: '100vw',
   gridGap: '2px',
-  height: '100vh',
+  height: '375px',
   backgroundColor: 'transparent',
   position: 'absolute',
   pointerEvents: 'none',
@@ -21,7 +21,7 @@ const defaultStyle = {
   gridTemplateRows: 'repeat(10, 1fr)',
   width: '100vw',
   gridGap: '2px',
-  height: '100vh',
+  height: '375px',
   backgroundColor: 'white',
 };
 

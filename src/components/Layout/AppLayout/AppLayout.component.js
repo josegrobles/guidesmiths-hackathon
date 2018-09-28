@@ -3,6 +3,59 @@ import Ship from '../../Commons/Ship/Ship.Component';
 import { Board } from '../../Commons';
 
 
+const defaultShips = [
+  {
+    noGrid: true,
+    "size": 2,
+    "direction": "h"
+  },
+  {
+    noGrid: true,
+    "size": 3,
+    "direction": "h"
+  },
+  {
+    noGrid: true,
+    "size": 3,
+    "direction": "h"
+  },
+  {
+    noGrid: true,
+    "size": 4,
+    "direction": "h"
+  },
+  {
+    noGrid: true,
+    "size": 5,
+    "direction": "h"
+  },
+  {
+    noGrid: true,
+    "size": 2,
+    "direction": "v"
+  },
+  {
+    noGrid: true,
+    "size": 3,
+    "direction": "v"
+  },
+  {
+    noGrid: true,
+    "size": 3,
+    "direction": "v"
+  },
+  {
+    noGrid: true,
+    "size": 4,
+    "direction": "v"
+  },
+  {
+    noGrid: true,
+    "size": 5,
+    "direction": "v"
+  },
+];
+
 const mockShips = [
   {
     "x": 1,
@@ -43,6 +96,8 @@ class App extends Component {
       pages: 'create',
       addedBoats: [],
       chooseBoat: {},
+      direction: 'h',
+      modal: true,
     };
     this.addBoat = this.addBoat.bind(this);
   }
@@ -55,7 +110,9 @@ class App extends Component {
 
   addBoat(index) {
     const { chooseBoat, addedBoats } = this.state;
-    console.log(index);
+    if (addedBoats.lenght === 5) {
+      return;
+    }
     const divider = index / 10;
     const dividerString = divider.toString();
     let x = 0;
@@ -72,8 +129,16 @@ class App extends Component {
     });
   }
 
+  rotate(letter) {
+    let newLetter = 'h';
+    if (letter === 'h') {
+      newLetter = 'v';
+    }
+    this.setState({ direction: newLetter });
+  }
+
   render() {
-    const { pages, addedBoats } = this.state;
+    const { pages, addedBoats, direction, modal } = this.state;
     return (
       <div>
         {pages === 'init' && (
@@ -82,26 +147,30 @@ class App extends Component {
         {pages === 'create' && (
           <div>
             <h3>Create your borad</h3>
+            <button onClick={() => this.rotate(direction)}>Rotate</button>
+            <div style={{ display: 'flex', height: '8vh' }}>
+              {defaultShips.filter(obj => obj.direction === direction).map((obj) => (
+                <div onClick={() => this.choseBoat(obj.size, obj.direction)}>
+                  <Ship {...obj} />
+                </div>
+              ))}
+            </div>
             <div style={{ position: 'relative' }}>
               <Board handleClick={this.addBoat} />
               <Board absolute>
                 {addedBoats.map(obj => <Ship  {...obj} />)}
               </Board>
             </div>
-            <div>
-              <button onClick={() => this.choseBoat(2, 'h')}>2 ship</button>
-              <button onClick={() => this.choseBoat(3, 'h')}>3 ship</button>
-              <button onClick={() => this.choseBoat(3, 'h')}>3 ship</button>
-              <button onClick={() => this.choseBoat(4, 'h')}>4 ship</button>
-              <button onClick={() => this.choseBoat(5, 'h')}>5 ship</button>
-            </div>
+            {addedBoats.length === 5 && (
+              <button>Start the fight</button>
+            )}
           </div>
         )}
         {pages === 'game' && (
           <div style={{ position: 'relative' }}>
             <Board />
             <Board absolute>
-              {mockShips.map(obj => <Ship  {...obj} />)}
+              {addedBoats.map(obj => <Ship  {...obj} />)}
             </Board>
           </div>
         )}
