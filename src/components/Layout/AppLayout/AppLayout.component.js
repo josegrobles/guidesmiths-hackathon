@@ -110,8 +110,8 @@ class App extends Component {
 
   addBoat(index) {
     const { chooseBoat, addedBoats } = this.state;
-    if (addedBoats.lenght === 5) {
-      return;
+    if (addedBoats.length === 5) {
+      return true;
     }
     const divider = index / 10;
     const dividerString = divider.toString();
