@@ -104,12 +104,19 @@ class App extends Component {
       tables: [],
       sessionId: '',
       turn: '',
+      auto: false,
     };
     this.handleUser = this.handleUser.bind(this);
     this.addBoat = this.addBoat.bind(this);
     this.interval = this.interval.bind(this);
     this.createMatch = this.createMatch.bind(this);
     this.shootBoat = this.shootBoat.bind(this);
+    this.autoSet = this.autoSet.bind(this);
+  }
+
+  autoSet() {
+    const { auto } = this.state;
+    this.setState({ auto: !auto });
   }
 
   choseBoat(size, direction) {
@@ -122,6 +129,23 @@ class App extends Component {
     try {
       const reqMatchStatus = await fetch(`/match?sessionId=${sessionId}&name=${this.state.user}&password=${password}`);
       const { tables, shoots, turn } = await reqMatchStatus.json();
+      if(turn === this.state.user){
+        if(this.state.auto){
+                const reqShoot = await fetch('/match/shoot', {
+        method: 'post',
+        body: JSON.stringify({
+          sessionId: this.state.sessionId,
+          name: this.state.user,
+          password: this.state.password,
+          auto: this.state.auto,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+        }
+      }
       console.log(tables);
       console.log(shoots);
       this.setState({ tables: tables[this.state.user], shoots, turn, pages: 'game' });
@@ -149,6 +173,7 @@ class App extends Component {
   }
 
   async shootBoat(index) {
+    const { auto } = this.state;
     const divider = index / 5;
     const dividerString = divider.toString();
     let x = index % 7;
@@ -163,6 +188,7 @@ class App extends Component {
           password: this.state.password,
           x: x,
           y: y,
+          auto: auto
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -202,7 +228,7 @@ class App extends Component {
   }
 
   render() {
-    const { pages, addedBoats, direction, modal, shoots, tables, turn, sessionId, password } = this.state;
+    const { pages, addedBoats, direction, modal, auto, shoots, tables, turn, sessionId, password } = this.state;
     return (
       <div>
         {pages === 'create' && (
@@ -252,6 +278,10 @@ class App extends Component {
             <h2>Turn: {turn}</h2>
             <p>{sessionId}</p>
             <p>{password}</p>
+            <button onClick={this.autoSet}>Auto mode</button>
+            {auto && (
+              <span>Auto mode</span>
+            )}
             <div style={{ position: 'relative' }}>
               <Board handleClick={this.shootBoat} />
               <Board absolute>
