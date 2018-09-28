@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LogInLayout from './LogInLayout.component';
+import LogInLayout from './LoginLayout.component';
 
 export default styled(LogInLayout).attrs({})`
   height: 100%;

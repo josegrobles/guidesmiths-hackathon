@@ -1,5 +1,5 @@
 import AppLayout from './AppLayout/AppLayout.container';
-import LogInLayout from './LogInLayout/LogInLayout.container';
+import LogInLayout from './LoginLayout/LoginLayout.container';
 import GameLayout from './GameLayout/GameLayout';
 
 export {
