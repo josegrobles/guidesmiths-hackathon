@@ -80,6 +80,8 @@ module.exports = () => {
       const lastShoot = shoots.slice(-1)[0];
       const lastHit = getHits(shoots).slice(-1)[0];
       console.log(!lastShoot)
+      if (candidates && candidates.v.length === 0 && candidates.h.length === 0) candidates = null;
+
       if (!lastShoot) {
         coords = randomShoot();
       } else {
