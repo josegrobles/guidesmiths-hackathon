@@ -1,7 +1,6 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
 import { AppLayout, GameLayout } from './components/Layout';
 
 const Routes = (
@@ -10,11 +9,6 @@ const Routes = (
       <Route
         exact
         path="/"
-        component={AppLayout}
-      />
-      <Route
-        exact
-        path="/build"
         component={AppLayout}
       />
       <Route

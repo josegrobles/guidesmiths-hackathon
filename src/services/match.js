@@ -1,8 +1,8 @@
 import apiFetch from './apiFetch'
-export const login = (data) =>
+export const match = (data) =>
   apiFetch({
     baseUrl: data.baseUrl,
     endPoint: encodeURI('/match'),
     method: 'POST',
-    body: data.name,
+    body: {...data.name},
   });

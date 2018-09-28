@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Ship from '../../Commons/Ship/Ship.component';
-import { Board } from '../../Commons';
+import { Board, Shoot } from '../../Commons';
 
 
 const defaultShips = [
@@ -98,15 +98,40 @@ class App extends Component {
       chooseBoat: {},
       direction: 'h',
       modal: true,
+      user: '',
+      password: '',
+      shoots: [],
+      tables: [],
+      sessionId: '',
+      turn: '',
     };
+    this.handleUser = this.handleUser.bind(this);
     this.addBoat = this.addBoat.bind(this);
+    this.interval = this.interval.bind(this);
     this.createMatch = this.createMatch.bind(this);
+    this.shootBoat = this.shootBoat.bind(this);
   }
 
   choseBoat(size, direction) {
     this.setState({
       chooseBoat: { size, direction },
     });
+  }
+
+  async interval({ password, sessionId }) {
+    try {
+      const reqMatchStatus = await fetch(`http://localhost:5000/match?sessionId=${sessionId}&name=${this.state.user}&password=${password}`);
+      const { tables, shoots, turn } = await reqMatchStatus.json();
+      console.log(tables);
+      console.log(shoots);
+      this.setState({ tables: tables[this.state.user], shoots, turn, pages: 'game' });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  handleUser({ target }) {
+    this.setState({ user: target.value });
   }
 
   addBoat(index) {
@@ -120,7 +145,34 @@ class App extends Component {
     this.setState({
       addedBoats: [...addedBoats, { ...chooseBoat, x, y }],
     });
+
   }
+
+  async shootBoat(index) {
+    const divider = index / 5;
+    const dividerString = divider.toString();
+    let x = index % 7;
+    let y = index % 7 === 0 ? Math.trunc(index / 7) : Math.trunc(index / 7) + 1;
+    console.log(index, x,y)
+    try {
+      const reqShoot = await fetch('http://localhost:5000/match/shoot', {
+        method: 'post',
+        body: JSON.stringify({
+          sessionId: this.state.sessionId,
+          name: this.state.user,
+          password: this.state.password,
+          x: x,
+          y: y,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
 
   rotate(letter) {
     let newLetter = 'h';
@@ -131,43 +183,26 @@ class App extends Component {
   }
 
   async createMatch() {
-    const { addedBoats } = this.state;
+    const { addedBoats, user } = this.state;
     const payload = {
       positions: addedBoats,
+      name: user,
     };
-    /*
-    try {
-      const req = await fetch('http://localhost:5000/match', {
-        method: 'post',
-        body: JSON.stringify(payload),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const {
-        name,
-        gameId,
-        sessionId,
-        shipPosition,
-      } = await req.json();
-      this.setState({
-        pages: 'game',
-        name,
-        gameId,
-        sessionId,
-        shipPosition,
-      });
-      const reqGetMAtch = await fetch('http://localhost:5000/match');
-      const mathcStatus = await reqGetMAtch.json();
-      console.log(mathcStatus);
-    } catch (err) {
-      console.log(err);
-    }*/
-    window.location.href = '/game';
+    //this.props.userLogin(payload);
+    const reqShoot = await fetch('http://localhost:5000/match', {
+      method: 'post',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const response = await reqShoot.json();
+    this.setState({...response, pages: 'game'});
+    setInterval(() => this.interval({...response}), 1000);
   }
 
   render() {
-    const { pages, addedBoats, direction, modal } = this.state;
+    const { pages, addedBoats, direction, modal, shoots, tables, turn, sessionId, password } = this.state;
     return (
       <div>
         {pages === 'init' && (
@@ -176,7 +211,21 @@ class App extends Component {
         {pages === 'create' && (
           <div>
             <h3>Create your borad</h3>
-            <button onClick={() => this.rotate(direction)}>Rotate</button>
+            <div>
+              <label>Add your user</label>
+              <input style={{
+                margin: '20px 10px',
+                padding: '10px 10px',
+                background: '#cac8c8',
+                borderRadius: '5px',
+              }} onChange={this.handleUser} />
+            </div>
+            <button style={{
+                margin: '20px 10px',
+                padding: '10px 10px',
+                background: '#cac8c8',
+                borderRadius: '5px',
+              }} onClick={() => this.rotate(direction)}>Rotate</button>
             <div style={{ display: 'flex', height: '8vh' }}>
               {defaultShips.filter(obj => obj.direction === direction).map((obj) => (
                 <div onClick={() => this.choseBoat(obj.size, obj.direction)}>
@@ -191,16 +240,36 @@ class App extends Component {
               </Board>
             </div>
             {addedBoats.length === 5 && (
-              <button onClick={this.createMatch}>Start the fight</button>
+              <button style={{
+                margin: '20px 10px',
+                padding: '10px 10px',
+                background: '#cac8c8',
+                borderRadius: '5px',
+              }} onClick={this.createMatch}>Start the fight</button>
             )}
           </div>
         )}
         {pages === 'game' && (
-          <div style={{ position: 'relative' }}>
-            <Board />
-            <Board absolute>
-              {addedBoats.map(obj => <Ship  {...obj} />)}
-            </Board>
+          <div>
+            <h2>Turn: {turn}</h2>
+            <p>{sessionId}</p>
+            <p>{password}</p>
+            <div style={{ position: 'relative' }}>
+              <Board handleClick={this.shootBoat} />
+              <Board absolute>
+                {shoots.filter(obj => obj.name === this.state.user).map(obj => <Shoot  {...obj} />)}
+              </Board>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div style={{ position: 'relative' }}>
+              <Board />
+              <Board absolute>
+                {tables.map(obj => <Ship  {...obj} />)}
+                {shoots.filter(obj => obj.name !== this.state.user).map(obj => <Shoot  {...obj} />)}
+              </Board>
+            </div>
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Ship from '../../Commons/Ship/Ship.component';
 import { Board, Shoot } from '../../Commons';
 
@@ -130,12 +131,13 @@ class App extends Component {
   }
 
   async interval() {
+    const { password, name, sessionId } = this.props;
     try {
       const reqMatchStatus = await fetch(`http://localhost:5000/match?sessionId=510598&name=pe1ww3&password=bCmgQ_Vzz`);
-      const { tables, shoots } = await reqMatchStatus.json();
+      const { tables, shoots, turn } = await reqMatchStatus.json();
       console.log(tables);
       console.log(shoots);
-      this.setState({ tables: tables.pe1ww3, shoots });
+      this.setState({ tables: tables.pe1ww3, shoots, turn });
     } catch (e) {
       console.log(e);
     }
@@ -180,4 +182,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  password: state.user.password,
+  name: state.user.name,
+  sessionId: state.user.sessionId,
+});
+
+export default connect()(App);

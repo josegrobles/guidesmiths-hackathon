@@ -8,16 +8,20 @@ import {
 import { mainLoading } from '../actions/common'
 import { USER_LOGIN, setAuthCredentials } from '../actions/user'
 
+//services
+import { match } from '../services/match'
+
 // config
 import config from '../../config.json'
 
 export function* profileLoginProcess({payload: {name}}) {
   try {
     yield put(mainLoading(true))
-    const result = yield call(match, {baseUrl: config.baseUrl, name})
+    const result = yield call(match, {baseUrl: config.baseUrl, name: {
+      name
+    }})
     if(result && result.sessionId) {
-      yield put(setAuthCredentials({name, sessionId: result.sessionId, isAuth: true}))
-      yield call(Router.push, '/mipepephone-productos', '/mi-pepephone/productos', { shallow: false })
+      yield put(setAuthCredentials({name, sessionId: result.sessionId, isAuth: true, password: result.password}))
     }
     yield put(mainLoading(false))
   } catch (e) {
