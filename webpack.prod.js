@@ -44,12 +44,6 @@ module.exports = merge(common, {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|es/),
-    new CompressionPlugin({
-      test: /\.js$/,
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+    
   ],
 });
